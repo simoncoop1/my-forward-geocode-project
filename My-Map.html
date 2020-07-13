@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Add Popup to a marker</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+            body { margin:0px; padding:0px; }
+            #map { position:absolute; top:0px; bottom:0px; width:100%; }
+        </style>
+</head>
+<body>
+<style>
+            
+            #markerWithExternalCss {
+                background-image: url('my-marker.png');
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+        </style>
+<div id='map'></div>
+<script>
+            //Add your LocationIQ Maps Access Token here (not the API token!)
+            locationiqKey = 'pk.5dcc7345e3b6b79383e6021a44bed5bb';
+            //Define the map and configure the map's theme
+            var map = new mapboxgl.Map({
+                container: 'map',
+                attributionControl: false, //need this to show a compact attribution icon (i) instead of the whole text
+                style: 'https://tiles.locationiq.com/v2/streets/vector.json?key='+locationiqKey,
+                zoom: 12,
+                center: [-1.45723343, 52.27519523]
+            });
+                        
+            //Two ways to attach the popup to markers
+            //https://www.mapbox.com/mapbox-gl-js/api#popup
+            
+            //1. Add it while creating the marker
+            // Create a popup
+            var popup = new mapboxgl.Popup()
+                .setHTML('<b>Plate Number:</b> SF001<br> <b>Type:</b> Truck');
+            
+            var el = document.createElement('div');
+            el.id = 'markerWithExternalCss';
+            // finally, create the marker
+            var markerWithExternalCss = new mapboxgl.Marker(el)
+                .setLngLat([-1.35346413,52.27398732])
+                .setPopup(popup)
+                .addTo(map);
+        
+            //2. Add it after the marker is created
+            var el = document.createElement('div');
+            el.id = 'markerWithExternalCss';
+            // finally, create the marker
+            var markerWithExternalCss2 = new mapboxgl.Marker(el)
+                .setLngLat([-1.37620926, 52.27866123])
+                .addTo(map);
+            
+            var popup2 = new mapboxgl.Popup()
+                .setHTML('<b>Plate Number:</b> SF002<br> <b>Type:</b> Car');
+
+            //Attach to the marker we just created
+            markerWithExternalCss2.setPopup(popup2); // sets a popup on this marker
+
+        </script>
+</body>
+</html>
+
+
