@@ -739,7 +739,7 @@
 		 //1. Add it while creating the marker
                  // Create a popup
                  var popup = new mapboxgl.Popup()
-			  .setHTML('<b>Food Processor:</b>company name <br> <b>Type of Processor:</b> shop<br><b>Address:</b>the street');
+			  .setHTML('<b>Food Processor:</b>'+ arec[1]+'<br> <b>Type of Processor:</b> shop<br><b>Address:</b>the street');
                             
                  var el = document.createElement('div');
                  el.id = 'markerWithExternalCss';
